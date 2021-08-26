@@ -1,0 +1,6 @@
+#usando a imagem do mysql padrão
+FROM  mysql:5.7
+
+#copiando script sql para inicialização do banco de dados
+COPY ./mysql-scripts/ /docker-entrypoint-initdb.d
+

@@ -3,12 +3,12 @@ version: "3"
 services: 
 
   db:
-    image: mysql:5.7
+    build: 
+      context: .
+      dockerfile: Dockerfile.mysql    
     container_name: mysql
     tty: true
-    command: --default-authentication-plugin=mysql_native_password
-    volumes: 
-      - ./mysql-files:/var/lib/mysql 
+    command: --default-authentication-plugin=mysql_native_password  
     restart: always    
     environment: 
       - MYSQL_ROOT_PASSWORD=mestre
@@ -16,8 +16,28 @@ services:
 
     networks: 
       - net-node
+  
+  node-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: node-app
+    tty: true
+    restart: always
+    networks: 
+      - net-node  
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
+    restart: always
+    tty: true
     ports: 
-      - 3306:3306
+      - 80:80
+    networks: 
+      - net-node
 
 networks: 
   net-node:

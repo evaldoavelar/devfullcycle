@@ -1,0 +1,19 @@
+#usando a imagem alpine do node
+
+FROM node:12.7-alpine
+
+#definindo diretório de trabalho
+WORKDIR /app
+
+#copiando os arquivos do node
+COPY node-js .
+
+# instalando depências
+RUN npm install
+
+#expondo porta
+EXPOSE 3000
+
+#executando 
+ENTRYPOINT  [ "node" , "index.js"]
+

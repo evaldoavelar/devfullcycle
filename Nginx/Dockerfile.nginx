@@ -1,0 +1,11 @@
+#usando a imagem alpine do nginx
+FROM nginx:1.21.1-alpine
+
+#substiruir o arquivo de configuração para usar proxy reverso
+COPY nginx.conf /etc/nginx/
+
+#expor a porta
+EXPOSE 80
+
+#executar o nginx
+ENTRYPOINT [ "nginx", "-g", "daemon off;"]
