@@ -1,8 +1,13 @@
+### estágio 1 ###
+
 #Compilar o executavel usando o alpine como base
 FROM golang:alpine3.14 as build
 
 # diretório de trabalho
 WORKDIR /build-app
+
+#instalar upx
+RUN apk add upx
 
 # copiar os arquivos
 COPY hello.go .
@@ -10,10 +15,16 @@ COPY hello.go .
 COPY go.mod .
 
 # compilar o pacote
-RUN go build .
+RUN go build -ldflags "-s -w" hello.go
+
+#compactar o executavel
+RUN upx /build-app/hello
+
+
+### estágio 2 ###
 
 #usando a menor imagem do alpine
-FROM alpine:3.14.1
+FROM busybox:stable
 
 # diretório de trabalho
 WORKDIR /app
