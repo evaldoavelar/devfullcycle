@@ -7,11 +7,22 @@ const config = {
     password:'mestre',
     database: 'teste'
 }
-// const conn = mysql.createConnection(config)
-// conn.connect();
-// const sql = `INSERT INTO usuarios(nome) VALUE ("${'José das flores'}");`
-// conn.query(sql);
-// conn.end();
+
+const conn = mysql.createConnection(config)
+conn.connect();
+
+
+var sql = "INSERT INTO usuarios (nome) VALUES ?";
+var values = [
+    ['Ana Maria'],
+    ['Beatriz'],
+    ['Carla'],
+    ['Daine']
+];
+conn.query(sql, [values], function(err) {
+    if (err) throw err;
+    conn.end();
+});
  
 app.get('/', function (req, res) {  
     
@@ -21,12 +32,10 @@ app.get('/', function (req, res) {
         
         if (error) throw error;  
 
-
         let lista = '';
-
         results.forEach(element => {
             lista += `<br> ${element.nome}` 
-        });//JSON.stringify(results[0].nome)
+        });
 
         res.send(`        
         <h1>Full Cycle Rocks!</h1>         
