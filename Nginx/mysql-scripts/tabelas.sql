@@ -5,3 +5,7 @@ CREATE TABLE usuarios (
 );
 
 INSERT INTO usuarios(nome) VALUE ("Ana Maria");
+INSERT INTO usuarios(nome) VALUE ("Beatriz");
+INSERT INTO usuarios(nome) VALUE ("Carla");
+INSERT INTO usuarios(nome) VALUE ("Daine");
+INSERT INTO usuarios(nome) VALUE ("Edina");

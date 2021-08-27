@@ -21,7 +21,17 @@ app.get('/', function (req, res) {
         
         if (error) throw error;  
 
-        res.send(`Fullcycle ${JSON.stringify(results[0].nome)}!`)
+
+        let lista = '';
+
+        results.forEach(element => {
+            lista += `<br> ${element.nome}` 
+        });//JSON.stringify(results[0].nome)
+
+        res.send(`        
+        <h1>Full Cycle Rocks!</h1>         
+        ${lista}
+        `)
       });
 
     conn.end();
